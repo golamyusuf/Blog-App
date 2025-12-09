@@ -1,5 +1,8 @@
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents a user in the blog application system.
+/// </summary>
 public class User : BaseEntity
 {
     public int Id { get; set; }

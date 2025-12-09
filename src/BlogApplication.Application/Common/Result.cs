@@ -1,5 +1,10 @@
 namespace BlogApplication.Application.Common;
 
+/// <summary>
+/// Represents the result of an operation with success/failure status and optional data or error message.
+/// Implements the Result pattern for explicit error handling.
+/// </summary>
+/// <typeparam name="T">The type of data returned on success.</typeparam>
 public class Result<T>
 {
     public bool IsSuccess { get; set; }

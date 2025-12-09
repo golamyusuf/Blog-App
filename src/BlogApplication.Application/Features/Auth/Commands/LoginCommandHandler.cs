@@ -6,7 +6,11 @@ using BlogApplication.Domain.Interfaces;
 
 namespace BlogApplication.Application.Features.Auth.Commands;
 
-public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginResponseDto>>
+/// <summary>
+/// Handler for processing user login commands.
+/// Validates credentials and generates JWT token on successful authentication.
+/// </summary>
+public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginResponse>>
 {
     private readonly IAuthService _authService;
     private readonly IUserRepository _userRepository;

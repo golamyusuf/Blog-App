@@ -3,6 +3,9 @@ using BlogApplication.Infrastructure.Data;
 
 namespace BlogApplication.Infrastructure.Repositories;
 
+/// <summary>
+/// Implementation of Unit of Work pattern for managing database transactions across multiple repositories.
+/// </summary>
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;

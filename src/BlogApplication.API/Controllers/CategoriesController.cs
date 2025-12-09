@@ -9,6 +9,9 @@ namespace BlogApplication.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+/// <summary>
+/// Controller for category management operations.
+/// </summary>
 public class CategoriesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -18,6 +21,11 @@ public class CategoriesController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Retrieves all categories, optionally filtered to active ones only.
+    /// </summary>
+    /// <param name="activeOnly">If true, returns only active categories (default: true).</param>
+    /// <returns>A list of categories.</returns>
     [HttpGet]
     public async Task<IActionResult> GetCategories([FromQuery] bool activeOnly = true)
     {
@@ -30,6 +38,14 @@ public class CategoriesController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// Creates a new category. Requires authentication.
+    /// </summary>
+    /// <param name="request">The category details (name and description).</param>
+    /// <returns>The created category with auto-generated slug.</returns>
+    /// <response code="201">Category created successfully.</response>
+    /// <response code="400">Invalid input or category already exists.</response>
+    /// <response code="401">User not authenticated.</response>
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto request)

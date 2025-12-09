@@ -4,6 +4,9 @@ using BlogApplication.Application.Common;
 
 namespace BlogApplication.Application.Features.Auth.Commands;
 
+/// <summary>
+/// Command for registering a new user account.
+/// </summary>
 public class RegisterCommand : IRequest<Result<UserDto>>
 {
     public string Username { get; set; } = string.Empty;

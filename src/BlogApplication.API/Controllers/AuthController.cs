@@ -7,6 +7,9 @@ namespace BlogApplication.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+/// <summary>
+/// Controller for authentication operations including user registration and login.
+/// </summary>
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -16,6 +19,13 @@ public class AuthController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Registers a new user account.
+    /// </summary>
+    /// <param name="request">The registration details including username, email, and password.</param>
+    /// <returns>The created user information.</returns>
+    /// <response code="200">User successfully registered.</response>
+    /// <response code="400">Invalid input or user already exists.</response>
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
     {
@@ -36,6 +46,13 @@ public class AuthController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// Authenticates a user and returns a JWT token.
+    /// </summary>
+    /// <param name="request">The login credentials (email and password).</param>
+    /// <returns>JWT token and user information on successful authentication.</returns>
+    /// <response code="200">Login successful, returns token.</response>
+    /// <response code="401">Invalid credentials.</response>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
     {

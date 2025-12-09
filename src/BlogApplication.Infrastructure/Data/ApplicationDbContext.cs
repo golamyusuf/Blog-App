@@ -3,6 +3,10 @@ using BlogApplication.Domain.Entities;
 
 namespace BlogApplication.Infrastructure.Data;
 
+/// <summary>
+/// Entity Framework Core database context for MySQL database.
+/// Manages Users, Roles, UserRoles, and Categories entities.
+/// </summary>
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

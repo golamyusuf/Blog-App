@@ -4,6 +4,10 @@ using BlogApplication.Domain.Exceptions;
 
 namespace BlogApplication.API.Middleware;
 
+/// <summary>
+/// Middleware for global exception handling and logging.
+/// Catches unhandled exceptions and returns standardized error responses.
+/// </summary>
 public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

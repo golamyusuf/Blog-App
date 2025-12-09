@@ -4,6 +4,9 @@ using BlogApplication.Application.Common;
 
 namespace BlogApplication.Application.Features.Blogs.Queries;
 
+/// <summary>
+/// Query for retrieving a paginated list of blog posts with optional filtering.
+/// </summary>
 public class GetBlogsQuery : IRequest<Result<BlogListDto>>
 {
     public int PageNumber { get; set; } = 1;

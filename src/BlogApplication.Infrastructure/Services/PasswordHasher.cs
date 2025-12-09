@@ -2,6 +2,10 @@ using BlogApplication.Application.Interfaces;
 
 namespace BlogApplication.Infrastructure.Services;
 
+/// <summary>
+/// Implementation of password hashing using BCrypt algorithm.
+/// Provides secure password storage and verification.
+/// </summary>
 public class PasswordHasher : IPasswordHasher
 {
     public string HashPassword(string password)

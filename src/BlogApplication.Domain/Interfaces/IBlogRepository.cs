@@ -2,6 +2,9 @@ using BlogApplication.Domain.Entities;
 
 namespace BlogApplication.Domain.Interfaces;
 
+/// <summary>
+/// Repository interface for blog data access operations in MongoDB.
+/// </summary>
 public interface IBlogRepository
 {
     Task<Blog?> GetByIdAsync(string id);

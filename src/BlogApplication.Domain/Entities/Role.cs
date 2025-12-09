@@ -1,5 +1,8 @@
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents a role that can be assigned to users for authorization purposes.
+/// </summary>
 public class Role : BaseEntity
 {
     public int Id { get; set; }

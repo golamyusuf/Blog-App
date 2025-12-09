@@ -3,6 +3,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents a blog post stored in MongoDB.
+/// Contains content, metadata, and denormalized user/category information for performance.
+/// </summary>
 public class Blog
 {
     [BsonId]

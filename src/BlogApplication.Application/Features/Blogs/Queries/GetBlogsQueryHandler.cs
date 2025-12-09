@@ -5,6 +5,9 @@ using BlogApplication.Domain.Interfaces;
 
 namespace BlogApplication.Application.Features.Blogs.Queries;
 
+/// <summary>
+/// Handler for retrieving paginated blog posts with optional filtering by user, category, or search term.
+/// </summary>
 public class GetBlogsQueryHandler : IRequestHandler<GetBlogsQuery, Result<BlogListDto>>
 {
     private readonly IBlogRepository _blogRepository;

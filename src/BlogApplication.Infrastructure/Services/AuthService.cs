@@ -10,6 +10,9 @@ using BlogApplication.Infrastructure.Configuration;
 
 namespace BlogApplication.Infrastructure.Services;
 
+/// <summary>
+/// Implementation of authentication service providing user login, registration, and JWT token generation.
+/// </summary>
 public class AuthService : IAuthService
 {
     private readonly IUserRepository _userRepository;

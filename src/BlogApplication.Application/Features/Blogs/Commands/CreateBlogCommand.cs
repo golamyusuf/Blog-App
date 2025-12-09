@@ -4,6 +4,9 @@ using BlogApplication.Application.Common;
 
 namespace BlogApplication.Application.Features.Blogs.Commands;
 
+/// <summary>
+/// Command for creating a new blog post.
+/// </summary>
 public class CreateBlogCommand : IRequest<Result<BlogDto>>
 {
     public int? CategoryId { get; set; }

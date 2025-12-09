@@ -7,6 +7,10 @@ using BlogApplication.Domain.Entities;
 
 namespace BlogApplication.Application.Features.Blogs.Commands;
 
+/// <summary>
+/// Handler for processing blog creation commands.
+/// Validates input, associates with category if specified, and stores in MongoDB.
+/// </summary>
 public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, Result<BlogDto>>
 {
     private readonly IBlogRepository _blogRepository;

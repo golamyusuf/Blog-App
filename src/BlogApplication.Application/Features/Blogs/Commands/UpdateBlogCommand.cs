@@ -4,6 +4,9 @@ using BlogApplication.Application.Common;
 
 namespace BlogApplication.Application.Features.Blogs.Commands;
 
+/// <summary>
+/// Command for updating an existing blog post.
+/// </summary>
 public class UpdateBlogCommand : IRequest<Result<BlogDto>>
 {
     public string Id { get; set; } = string.Empty;

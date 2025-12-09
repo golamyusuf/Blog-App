@@ -1,5 +1,8 @@
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents the many-to-many relationship between users and roles.
+/// </summary>
 public class UserRole
 {
     public int UserId { get; set; }

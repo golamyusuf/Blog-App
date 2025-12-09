@@ -5,6 +5,9 @@ using BlogApplication.Infrastructure.Data;
 
 namespace BlogApplication.Infrastructure.Repositories;
 
+/// <summary>
+/// Implementation of user repository for MySQL database operations using Entity Framework Core.
+/// </summary>
 public class UserRepository : IUserRepository
 {
     private readonly ApplicationDbContext _context;

@@ -5,6 +5,10 @@ using BlogApplication.Infrastructure.Data;
 
 namespace BlogApplication.Infrastructure.Repositories;
 
+/// <summary>
+/// Implementation of blog repository for MongoDB database operations.
+/// Handles CRUD operations and complex queries for blog posts.
+/// </summary>
 public class BlogRepository : IBlogRepository
 {
     private readonly MongoDbContext _context;

@@ -6,6 +6,10 @@ using BlogApplication.Domain.Interfaces;
 
 namespace BlogApplication.Application.Features.Auth.Commands;
 
+/// <summary>
+/// Handler for processing user registration commands.
+/// Creates a new user account and assigns the default User role.
+/// </summary>
 public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Result<UserDto>>
 {
     private readonly IAuthService _authService;

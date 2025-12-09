@@ -1,5 +1,9 @@
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents a category for organizing blog posts.
+/// Categories can be created by both administrators and regular users.
+/// </summary>
 public class Category : BaseEntity
 {
     public int Id { get; set; }

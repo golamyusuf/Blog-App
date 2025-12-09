@@ -9,6 +9,9 @@ namespace BlogApplication.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+/// <summary>
+/// Controller for blog post operations including CRUD operations and searching.
+/// </summary>
 public class BlogsController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -18,6 +21,15 @@ public class BlogsController : ControllerBase
         _mediator = mediator;
     }
 
+    /// <summary>
+    /// Retrieves a paginated list of blog posts with optional filtering.
+    /// </summary>
+    /// <param name="pageNumber">The page number (default: 1).</param>
+    /// <param name="pageSize">The number of items per page (default: 10).</param>
+    /// <param name="userId">Optional filter by user ID.</param>
+    /// <param name="categoryId">Optional filter by category ID.</param>
+    /// <param name="searchTerm">Optional search term for title/content.</param>
+    /// <returns>A paginated list of blog posts.</returns>
     [HttpGet]
     public async Task<IActionResult> GetBlogs([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, 
         [FromQuery] int? userId = null, [FromQuery] int? categoryId = null, [FromQuery] string? searchTerm = null)
@@ -40,6 +52,13 @@ public class BlogsController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// Retrieves a single blog post by its ID and increments view count.
+    /// </summary>
+    /// <param name="id">The blog post ID.</param>
+    /// <returns>The blog post details.</returns>
+    /// <response code="200">Blog post found.</response>
+    /// <response code="404">Blog post not found.</response>
     [HttpGet("{id}")]
     public async Task<IActionResult> GetBlog(string id)
     {
@@ -52,6 +71,14 @@ public class BlogsController : ControllerBase
         return Ok(result.Data);
     }
 
+    /// <summary>
+    /// Creates a new blog post. Requires authentication.
+    /// </summary>
+    /// <param name="request">The blog post details.</param>
+    /// <returns>The created blog post.</returns>
+    /// <response code="201">Blog post created successfully.</response>
+    /// <response code="400">Invalid input.</response>
+    /// <response code="401">User not authenticated.</response>
     [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateBlog([FromBody] CreateBlogDto request)

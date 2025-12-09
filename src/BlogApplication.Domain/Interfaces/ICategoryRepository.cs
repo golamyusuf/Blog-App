@@ -2,6 +2,9 @@ using BlogApplication.Domain.Entities;
 
 namespace BlogApplication.Domain.Interfaces;
 
+/// <summary>
+/// Repository interface for category data access operations.
+/// </summary>
 public interface ICategoryRepository
 {
     Task<Category?> GetByIdAsync(int id);

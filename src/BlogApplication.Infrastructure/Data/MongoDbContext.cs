@@ -5,6 +5,10 @@ using Microsoft.Extensions.Options;
 
 namespace BlogApplication.Infrastructure.Data;
 
+/// <summary>
+/// MongoDB database context for storing blog posts and related media.
+/// Provides access to the Blogs collection.
+/// </summary>
 public class MongoDbContext
 {
     private readonly IMongoDatabase _database;

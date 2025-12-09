@@ -1,5 +1,8 @@
 namespace BlogApplication.Domain.Entities;
 
+/// <summary>
+/// Represents a media item (image or video) embedded in a blog post.
+/// </summary>
 public class MediaItem
 {
     public string Url { get; set; } = string.Empty;

@@ -4,7 +4,10 @@ using BlogApplication.Application.Common;
 
 namespace BlogApplication.Application.Features.Auth.Commands;
 
-public class LoginCommand : IRequest<Result<LoginResponseDto>>
+/// <summary>
+/// Command for user authentication.
+/// </summary>
+public class LoginCommand : IRequest<Result<LoginResponse>>
 {
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;

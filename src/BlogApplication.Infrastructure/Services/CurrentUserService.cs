@@ -4,6 +4,10 @@ using BlogApplication.Application.Interfaces;
 
 namespace BlogApplication.Infrastructure.Services;
 
+/// <summary>
+/// Service for accessing information about the currently authenticated user from HTTP context.
+/// Extracts user details from JWT claims.
+/// </summary>
 public class CurrentUserService : ICurrentUserService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;

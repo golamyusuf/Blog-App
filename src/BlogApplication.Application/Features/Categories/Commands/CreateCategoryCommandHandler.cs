@@ -6,6 +6,10 @@ using BlogApplication.Application.Interfaces;
 
 namespace BlogApplication.Application.Features.Categories.Commands;
 
+/// <summary>
+/// Handler for processing category creation commands.
+/// Validates uniqueness, generates URL-friendly slug, and stores in database.
+/// </summary>
 public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Result<CategoryDto>>
 {
     private readonly ICategoryRepository _categoryRepository;
