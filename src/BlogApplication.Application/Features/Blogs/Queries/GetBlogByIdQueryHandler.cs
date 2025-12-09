@@ -31,6 +31,8 @@ public class GetBlogByIdQueryHandler : IRequestHandler<GetBlogByIdQuery, Result<
                 Id = blog.Id,
                 UserId = blog.UserId,
                 Username = blog.Username,
+                CategoryId = blog.CategoryId,
+                CategoryName = blog.CategoryName,
                 Title = blog.Title,
                 Content = blog.Content,
                 Summary = blog.Summary,

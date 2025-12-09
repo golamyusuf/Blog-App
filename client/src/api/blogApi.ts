@@ -2,11 +2,12 @@ import axiosInstance from './axios';
 import { Blog, BlogListResponse, CreateBlogRequest, UpdateBlogRequest } from '../types';
 
 export const blogApi = {
-  getBlogs: async (pageNumber = 1, pageSize = 10, searchTerm?: string): Promise<BlogListResponse> => {
+  getBlogs: async (pageNumber = 1, pageSize = 10, searchTerm?: string, categoryId?: number): Promise<BlogListResponse> => {
     const params = new URLSearchParams();
     params.append('pageNumber', pageNumber.toString());
     params.append('pageSize', pageSize.toString());
     if (searchTerm) params.append('searchTerm', searchTerm);
+    if (categoryId) params.append('categoryId', categoryId.toString());
     
     const response = await axiosInstance.get(`/blogs?${params.toString()}`);
     return response.data;

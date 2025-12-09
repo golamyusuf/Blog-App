@@ -20,13 +20,14 @@ public class BlogsController : ControllerBase
 
     [HttpGet]
     public async Task<IActionResult> GetBlogs([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10, 
-        [FromQuery] int? userId = null, [FromQuery] string? searchTerm = null)
+        [FromQuery] int? userId = null, [FromQuery] int? categoryId = null, [FromQuery] string? searchTerm = null)
     {
         var query = new GetBlogsQuery
         {
             PageNumber = pageNumber,
             PageSize = pageSize,
             UserId = userId,
+            CategoryId = categoryId,
             SearchTerm = searchTerm,
             PublishedOnly = true
         };
@@ -57,6 +58,7 @@ public class BlogsController : ControllerBase
     {
         var command = new CreateBlogCommand
         {
+            CategoryId = request.CategoryId,
             Title = request.Title,
             Content = request.Content,
             Summary = request.Summary,

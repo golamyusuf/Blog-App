@@ -1,24 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { blogApi } from '../api/blogApi';
+import { categoryApi } from '../api/categoryApi';
 import { toast } from 'react-toastify';
-import { MediaItem } from '../types';
+import { MediaItem, Category } from '../types';
 import './BlogFormPage.css';
 
 const CreateBlogPage: React.FC = () => {
   const [formData, setFormData] = useState({
+    categoryId: '',
     title: '',
     content: '',
     summary: '',
     tags: '',
     isPublished: true
   });
+  const [categories, setCategories] = useState<Category[]>([]);
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [currentMedia, setCurrentMedia] = useState({ url: '', type: 'Image' as 'Image' | 'Video', caption: '' });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await categoryApi.getCategories(true);
+        setCategories(data);
+      } catch (error) {
+        toast.error('Failed to load categories');
+      }
+    };
+    loadCategories();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -70,6 +85,7 @@ const CreateBlogPage: React.FC = () => {
       }
       
       await blogApi.createBlog({
+        categoryId: formData.categoryId ? parseInt(formData.categoryId) : undefined,
         title: formData.title,
         content: formData.content,
         summary: formData.summary || undefined,
@@ -95,6 +111,23 @@ const CreateBlogPage: React.FC = () => {
           <h2 className="form-title">Create New Blog</h2>
 
           <form onSubmit={handleSubmit} className="blog-form">
+            <div className="form-group">
+              <label htmlFor="categoryId">Category</label>
+              <select
+                id="categoryId"
+                name="categoryId"
+                value={formData.categoryId}
+                onChange={handleChange}
+              >
+                <option value="">-- Select Category (Optional) --</option>
+                {categories.map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
             <div className="form-group">
               <label htmlFor="title">Title *</label>
               <input

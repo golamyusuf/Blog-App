@@ -26,7 +26,12 @@ const Navbar: React.FC = () => {
             <>
               <Link to="/create-blog" className="nav-link">Create Blog</Link>
               <Link to="/my-blogs" className="nav-link">My Blogs</Link>
-              {isAdmin && <Link to="/admin" className="nav-link">Admin</Link>}
+              {isAdmin && (
+                <>
+                  <Link to="/admin" className="nav-link">Admin</Link>
+                  <Link to="/admin/categories" className="nav-link">Categories</Link>
+                </>
+              )}
               <div className="user-info">
                 <span>Welcome, {user?.username}!</span>
                 <button onClick={handleLogout} className="btn-logout">Logout</button>

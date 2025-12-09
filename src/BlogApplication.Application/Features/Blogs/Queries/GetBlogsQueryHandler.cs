@@ -31,6 +31,11 @@ public class GetBlogsQueryHandler : IRequestHandler<GetBlogsQuery, Result<BlogLi
                 blogs = await _blogRepository.GetByUserIdAsync(request.UserId.Value, request.PageNumber, request.PageSize);
                 totalCount = await _blogRepository.GetUserBlogsCountAsync(request.UserId.Value);
             }
+            else if (request.CategoryId.HasValue && request.PublishedOnly)
+            {
+                blogs = await _blogRepository.GetPublishedByCategoryAsync(request.CategoryId.Value, request.PageNumber, request.PageSize);
+                totalCount = await _blogRepository.GetCategoryBlogsCountAsync(request.CategoryId.Value);
+            }
             else if (request.PublishedOnly)
             {
                 blogs = await _blogRepository.GetPublishedAsync(request.PageNumber, request.PageSize);
@@ -47,6 +52,8 @@ public class GetBlogsQueryHandler : IRequestHandler<GetBlogsQuery, Result<BlogLi
                 Id = blog.Id,
                 UserId = blog.UserId,
                 Username = blog.Username,
+                CategoryId = blog.CategoryId,
+                CategoryName = blog.CategoryName,
                 Title = blog.Title,
                 Content = blog.Content,
                 Summary = blog.Summary,

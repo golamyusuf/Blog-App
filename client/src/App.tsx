@@ -12,6 +12,7 @@ import CreateBlogPage from './pages/CreateBlogPage';
 import EditBlogPage from './pages/EditBlogPage';
 import MyBlogsPage from './pages/MyBlogsPage';
 import AdminPage from './pages/AdminPage';
+import CategoryManagementPage from './pages/CategoryManagementPage';
 import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -53,6 +54,14 @@ function App() {
               element={
                 <PrivateRoute requireAdmin>
                   <AdminPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/admin/categories"
+              element={
+                <PrivateRoute requireAdmin>
+                  <CategoryManagementPage />
                 </PrivateRoute>
               }
             />

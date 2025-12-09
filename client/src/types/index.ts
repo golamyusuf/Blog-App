@@ -27,10 +27,27 @@ export interface RegisterRequest {
   lastName?: string;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+  description?: string;
+  slug: string;
+  createdByUserId: number;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface CreateCategoryRequest {
+  name: string;
+  description?: string;
+}
+
 export interface Blog {
   id: string;
   userId: number;
   username: string;
+  categoryId?: number;
+  categoryName?: string;
   title: string;
   content: string;
   summary?: string;
@@ -51,6 +68,7 @@ export interface MediaItem {
 }
 
 export interface CreateBlogRequest {
+  categoryId?: number;
   title: string;
   content: string;
   summary?: string;

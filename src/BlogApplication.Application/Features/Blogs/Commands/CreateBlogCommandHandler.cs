@@ -12,15 +12,18 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, Resul
     private readonly IBlogRepository _blogRepository;
     private readonly ICurrentUserService _currentUserService;
     private readonly IUserRepository _userRepository;
+    private readonly ICategoryRepository _categoryRepository;
 
     public CreateBlogCommandHandler(
         IBlogRepository blogRepository,
         ICurrentUserService currentUserService,
-        IUserRepository userRepository)
+        IUserRepository userRepository,
+        ICategoryRepository categoryRepository)
     {
         _blogRepository = blogRepository;
         _currentUserService = currentUserService;
         _userRepository = userRepository;
+        _categoryRepository = categoryRepository;
     }
 
     public async Task<Result<BlogDto>> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
@@ -31,10 +34,21 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, Resul
             if (user == null)
                 return Result<BlogDto>.Failure("User not found");
 
+            string? categoryName = null;
+            if (request.CategoryId.HasValue)
+            {
+                var category = await _categoryRepository.GetByIdAsync(request.CategoryId.Value);
+                if (category == null)
+                    return Result<BlogDto>.Failure("Category not found");
+                categoryName = category.Name;
+            }
+
             var blog = new Blog
             {
                 UserId = _currentUserService.UserId,
                 Username = user.Username,
+                CategoryId = request.CategoryId,
+                CategoryName = categoryName,
                 Title = request.Title,
                 Content = request.Content,
                 Summary = request.Summary,
@@ -69,6 +83,8 @@ public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, Resul
             Id = blog.Id,
             UserId = blog.UserId,
             Username = blog.Username,
+            CategoryId = blog.CategoryId,
+            CategoryName = blog.CategoryName,
             Title = blog.Title,
             Content = blog.Content,
             Summary = blog.Summary,

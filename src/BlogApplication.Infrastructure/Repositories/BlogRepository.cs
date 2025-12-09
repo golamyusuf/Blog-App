@@ -51,6 +51,16 @@ public class BlogRepository : IBlogRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<Blog>> GetPublishedByCategoryAsync(int categoryId, int pageNumber, int pageSize)
+    {
+        return await _context.Blogs
+            .Find(b => b.IsPublished && b.CategoryId == categoryId)
+            .SortByDescending(b => b.PublishedAt)
+            .Skip((pageNumber - 1) * pageSize)
+            .Limit(pageSize)
+            .ToListAsync();
+    }
+
     public async Task<IEnumerable<Blog>> SearchAsync(string searchTerm, int pageNumber, int pageSize)
     {
         var filter = Builders<Blog>.Filter.Or(
@@ -91,6 +101,11 @@ public class BlogRepository : IBlogRepository
     public async Task<long> GetUserBlogsCountAsync(int userId)
     {
         return await _context.Blogs.CountDocumentsAsync(b => b.UserId == userId);
+    }
+
+    public async Task<long> GetCategoryBlogsCountAsync(int categoryId)
+    {
+        return await _context.Blogs.CountDocumentsAsync(b => b.IsPublished && b.CategoryId == categoryId);
     }
 
     public async Task IncrementViewCountAsync(string id)
