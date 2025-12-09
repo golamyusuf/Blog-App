@@ -1,0 +1,39 @@
+# Git ignore file
+
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.csproj.user
+.vs/
+*.DotSettings.user
+
+## Frontend
+node_modules/
+dist/
+.vite/
+*.log
+.env
+.env.local
+
+## Database
+*.db
+*.db-shm
+*.db-wal
+
+## IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Secrets
+appsettings.Development.json
+*.pfx
+*.p12
