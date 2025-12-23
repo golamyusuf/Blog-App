@@ -43,10 +43,10 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.Name).HasMaxLength(50).IsRequired();
             entity.Property(e => e.Description).HasMaxLength(200);
 
-            // Seed roles
+            // Seed roles - using static date to avoid migration conflicts
             entity.HasData(
-                new Role { Id = 1, Name = "User", Description = "Regular user", CreatedAt = DateTime.UtcNow },
-                new Role { Id = 2, Name = "Admin", Description = "Administrator", CreatedAt = DateTime.UtcNow }
+                new Role { Id = 1, Name = "User", Description = "Regular user", CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+                new Role { Id = 2, Name = "Admin", Description = "Administrator", CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
             );
         });
 
